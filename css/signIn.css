@@ -10,6 +10,7 @@ html, body{
     display : flex;
     justify-content : center;
     align-items : center;
+    background : rgb(245, 246, 247);
 }
 .sign_in_wrapper{
     height : 100px;
