@@ -8,60 +8,66 @@
     <body>
         <div class="content">
             <div class="sign_up_wrapper">
-                <div class="info">
-                    <input placeholder="아이디" class="input">
-                </div>
-                <div class="info">
-                    <input placeholder="비밀번호" class="input">
-                </div>
-                <div class="info">
-                    <input placeholder="비밀번호재확인" class="input">
-                </div>
-                <div class="info">
-                    <input placeholder="이름" class="input">
-                </div>
-                
-                <div class="birth_wrapper">
-                    <div class="birth_year">
-                        <input placeholder="년도">
+                <form class="sign_up_form">
+                    <div class="info">
+                        <input placeholder="아이디" class="input">
                     </div>
-                    <div class="birth_month">
-                        <select class="dropmenu">
-                            <option>월</option>
-                            <option value="01">1</option>
-                            <option value="02">2</option>
-                            <option value="03">3</option>
-                            <option value="04">4</option>
-                            <option value="05">5</option>
-                            <option value="06">6</option>
-                            <option value="07">7</option>
-                            <option value="08">8</option>
-                            <option value="09">9</option>
-                            <option value="10">10</option>
-                            <option value="11">11</option>
-                            <option value="12">12</option>
+                    <div class="info">
+                        <input placeholder="비밀번호" class="input">
+                    </div>
+                    <div class="info">
+                        <input placeholder="비밀번호재확인" class="input">
+                    </div>
+                    <div class="info">
+                        <input placeholder="이름" class="input">
+                    </div>
+                    
+                    <div class="birth_wrapper">
+                        <div class="birth_year">
+                            <input placeholder="년도">
+                        </div>
+                        <div class="birth_month">
+                            <select class="birth_month_dropmenu">
+                                <option>월</option>
+                                <option value="01">1</option>
+                                <option value="02">2</option>
+                                <option value="03">3</option>
+                                <option value="04">4</option>
+                                <option value="05">5</option>
+                                <option value="06">6</option>
+                                <option value="07">7</option>
+                                <option value="08">8</option>
+                                <option value="09">9</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                        </div>
+                        <div class="birth_date">
+                            <input placeholder="일">
+                        </div>
+                    </div>
+                    <div class="info">
+                        <select class="gender_dropmenu">
+                            <option>성별</option>
+                            <option value="M">남</option>
+                            <option value="F">여</option>
                         </select>
                     </div>
-                    <div class="birth_date">
-                        <input placeholder="일">
+                    <div class="info">
+                        <input placeholder="이메일" class="input">
                     </div>
-                </div>
-                <div class="info">
-                    <input placeholder="성별" class="input">
-                </div>
-                <div class="info">
-                    <input placeholder="이메일" class="input">
-                </div>
-                <div class="info">
-                    <input placeholder="휴대전화" class="input">
-                </div>
-                <div class="info">
-                    <input placeholder="관심사" class="input">
-                </div>
-                <div class="button_wrapper">
-                    <button id="init">초기화</button>
-                    <button id="interest">가입하기</button>
-                </div>
+                    <div class="info">
+                        <input placeholder="휴대전화" class="input">
+                    </div>
+                    <div class="info">
+                        <input placeholder="관심사" class="input">
+                    </div>
+                    <div class="button_wrapper">
+                        <button id="init">초기화</button>
+                        <button id="sign_up_button">가입하기</button>
+                    </div>
+                </form>
             </div>
         </div>
     </body>
