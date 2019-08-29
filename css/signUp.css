@@ -26,24 +26,76 @@ html, body{
     align-items : center;
 }
 .info{
-    padding: 0;
-    margin: 0;
     height: 35px;
     width: 250px;
+    background: white;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(218, 218, 218);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.input{
+    padding: 0;
+    margin: 0;
+    width: 95%;
+    height: 65%;
     display : flex;
     justify-content : space-between;
     font-size: 0.9rem;
+    border: none;
+}
+.input:focus{
+    outline: 0;
+}
+.birth_wrapper{
+    height: 35px;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
 }
 .birth_year, .birth_month, .birth_date{
     padding: 0;
     margin: 0;
     width: 30%;
+    height: 100%;
+    background: white;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(218, 218, 218);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.birth_year > *, .birth_date > *{
+    width: 85%;
+    height: 65%;
     font-size: 0.9rem;
+    border: none;
+}
+.dropmenu{
+    width: 85%;
+    height: 65%;
+    width: 50px;
+    font-size: 0.9rem;
+    -webkit-appearance: none;
+    background: white url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 120% 50% no-repeat;
+    background-size: 40% 35%;
+    border-radius: 0;
+    border: none;
+}
+.button_wrapper{
+    height: 35px;
+    width: 250px;
+    display: flex;
+    justify-content: space-between;
 }
 button{
     padding: 0;
     margin: 0;
     width : 48%;
+    height: 100%;
     outline: 0;
     background: rgb(90, 194, 102); 
     color: rgb(250, 250, 250);
