@@ -36,6 +36,9 @@ html, body{
     color: rgb(250, 250, 250);
     border: none;
 }
+.inputbox:focus{
+    outline: 0;
+}
 button:focus{
     outline: 0;
 }
