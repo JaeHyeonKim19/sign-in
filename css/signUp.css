@@ -46,7 +46,7 @@ html, body{
     font-size: 0.9rem;
     border: none;
 }
-.input:focus{
+input:focus{
     outline: 0;
 }
 .birth_wrapper{
