@@ -19,7 +19,7 @@ html, body{
     justify-content: center;
     align-items: center;
 }
-.login_form{
+.sign_in_form{
     height: 200px;
     display: flex;
     flex-direction: column;
