@@ -26,7 +26,28 @@ html, body{
     justify-content: space-between;
     align-items: center;
 }
-.login_button, .inputbox{
+.id_input_area, .pw_input_area{
+    height: 35px;
+    width: 250px;
+    background: white;
+    border: solid;
+    border-width: 1px;
+    border-color: rgb(218, 218, 218);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inputbox{
+    margin: 0;
+    padding: 0;
+    width: 95%;
+    height: 65%;
+    font-size: 0.9rem;
+    border: none;
+}
+.login_button{
+    margin: 0;
+    padding: 0;
     height: 35px;
     width: 250px;
     font-size: 0.9rem;
