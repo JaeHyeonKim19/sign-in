@@ -5,7 +5,9 @@ html, body{
     height: 100%;
 }
 :root{
+    --basic-border-color: rgb(218, 218, 218);
     --naver-green: rgb(90, 194, 102); 
+    --normal-font-size: 0.9rem;
 }
 .wrapper{
     width: 100%;
@@ -14,10 +16,9 @@ html, body{
 }
 header{
     width: 100%;
-    height: 25%;
+    height: 10%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
 }
 .logo{
@@ -25,12 +26,16 @@ header{
     height: 45px;
     background: url(https://static.nid.naver.com/images/ui/login/pc_sp_login_190522.png) no-repeat;
 }
+.title{
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--naver-green);
+}
 footer{
     width: 100%;
-    height: 25%;
+    height: 10%;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
 }
 .footer_content{
@@ -41,11 +46,11 @@ footer{
 }
 .content{
     width: 100%;
-    height: 50%;
+    height: 80%;
     display: flex;
     justify-content: center;
     align-items: center;
-}
+  }
 .sign_in_wrapper{
     width: 100%;
     height: 100%;
@@ -82,7 +87,7 @@ footer{
     font-size: 0.9rem;
     border: none;
 }
-.id_message{
+.sign_in_id_message{
     margin : 5px 0 0 5px;
     font-size: 0.75rem;
     color: red;
@@ -105,8 +110,127 @@ footer{
 button:focus{
     outline: 0;
 }
-a{
+.sign_up{
     font-size: 0.8rem;
     color: rgb(166, 166, 166);
     text-decoration: none;
+}
+.sign_up_wrapper{
+    width : 350px;
+    height : 100%;
+}
+.sign_up_form{
+    width: 100%;
+    height: 100%;
+    display : flex;
+    flex-direction : column;
+    justify-content : space-between;
+    align-items : center;
+}
+.component_wrapper{
+    height: 7%;
+    width: 100%;
+}
+label{
+    margin: 0 0 0 1%;
+    font-size: 0.8rem;
+}
+.info{
+    height: 35px;
+    width: 100%px;
+    background: white;
+    border: solid;
+    border-width: 1px;
+    border-color: var(--basic-border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.info:focus-within, .birth_year:focus-within, .birth_month:focus-within, .birth_date:focus-within{
+    border-color: var(--naver-green);
+}
+.input{
+    width: 95%;
+    height: 65%;
+    display : flex;
+    justify-content : space-between;
+    font-size: var(--normal-font-size);
+    border: none;
+}
+input:focus{
+    outline: 0;
+}
+.id_message{
+    margin : 5px 0 0 5px;
+    font-size: 0.75rem;
+    color: red;
+}
+.birth_input_wrapper{
+    height: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.birth_year, .birth_month, .birth_date{
+    width: 30%;
+    height: 100%;
+    background: white;
+    border: solid;
+    border-width: 1px;
+    border-color: var(--basic-border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.birth_year > *, .birth_date > *{
+    width: 85%;
+    height: 65%;
+    font-size: var(--normal-font-size);
+    border: none;
+}
+.birth_month_dropmenu{
+    width: 85%;
+    height: 65%;
+    font-size: var(--normal-font-size);
+    -webkit-appearance: none;
+    background: white url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 100% 50% no-repeat;
+    background-size: 20% 25%;
+    border-radius: 0;
+    border: none;
+}
+.gender_dropmenu{
+    width: 95%;
+    height: 65%;
+    font-size: var(--normal-font-size);
+    -webkit-appearance: none;
+    background: white url(https://static.nid.naver.com/images/join/pc/sel_arr_2x.gif) 100% 50% no-repeat;
+    background-size: 5.5% 25%;
+    border-radius: 0;
+    border: none;
+}
+.agreement_wrapper{
+    height: 20px;
+    width: 100%;
+}
+.term_link{
+    text-align: left;
+    font-size: 0.75rem;
+    color: rgb(0, 0, 0);
+}
+.button_wrapper{
+    height: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+#init, #sign_up_button{
+    padding: 0;
+    margin: 0;
+    width : 48%;
+    height: 100%;
+    outline: 0;
+    background: var(--naver-green);
+    color: rgb(250, 250, 250);
+    border: none;
+    font-size: var(--normal-font-size);
 }
