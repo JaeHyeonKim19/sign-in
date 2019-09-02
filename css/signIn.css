@@ -58,7 +58,7 @@ footer{
     justify-content: center;
     align-items: center;
 }
-.sign_in_form{
+.sign_in_form, .main_buttons_wrapper{
     height: 200px;
     display: flex;
     flex-direction: column;
@@ -92,22 +92,17 @@ footer{
     font-size: 0.75rem;
     color: red;
 }
-.login_button{
+.login_button, .main_sign_in_button{
     margin: 0;
     padding: 0;
     height: 35px;
     width: 250px;
     font-size: 0.9rem;
-}
-.login_button{
     background: rgb(90, 194, 102); 
     color: rgb(250, 250, 250);
     border: none;
 }
-.id_inputbox:focus, .pw_inputbox:focus{
-    outline: 0;
-}
-button:focus{
+.id_inputbox:focus, .pw_inputbox:focus, button:focus{
     outline: 0;
 }
 .sign_up{
@@ -160,7 +155,7 @@ label{
 input:focus{
     outline: 0;
 }
-.id_message{
+.message{
     margin : 5px 0 0 5px;
     font-size: 0.75rem;
     color: red;
