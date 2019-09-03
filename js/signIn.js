@@ -118,8 +118,8 @@ const signUpHtml = `
                 </div>
                 <div class="component_wrapper">
                     <label>관심사</label>
-                    <div class="info">
-                        <input class="input">
+                    <div id="tag_wrapper" class="info">
+                        <input id="tag_input" class="input">
                     </div>
                     <div id="interest_message" class="message"></div>
                 </div>
@@ -382,6 +382,34 @@ const termModalEvents = {
     }
 }
 
+const interestTag = {
+    makeTagFrame : (interest) => {
+        const tagFrame = `
+        <div class="tag">
+            <span>${interest}</span>
+            <div class="tag_close">&times;</div>
+        </div>
+        `;
+        return tagFrame;
+    },
+    insertTagEvent : () => {
+        const tagWrapper = document.getElementById('tag_wrapper');
+        const interestInput = document.querySelector('#tag_input');
+        let interestInputValue = ``;
+        let tag = ``;
+        tagWrapper.addEventListener('keyup', (e) => {
+            if(e.key===','){
+                interestInputValue = interestInput.value;
+                interestInputValue = interestInputValue.substring(0, interestInputValue.length-1);
+                tag = interestTag.makeTagFrame(interestInputValue);
+                interestInput.insertAdjacentHTML('beforebegin', tag);
+                interestInput.value = '';
+            }
+        });
+
+    }
+}
+
 const registerSignInEvent = () => {
     const signInButton = document.querySelector('.main_sign_in_button');
     signInButton.addEventListener('click', () => {
@@ -404,6 +432,7 @@ const registerSignUpEvent = () => {
         validationEvents.registerEmailMessageEvent();
         validationEvents.registerPhoneMessageEvent();
         termModalEvents.registerTermModalPopupEvent();
+        interestTag.insertTagEvent();
     });
 }
 
