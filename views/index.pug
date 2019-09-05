@@ -1,5 +1,14 @@
-extends layout
 
-block content
-  h1= title
-  p Welcome to #{title}
+head
+  title Sign in
+  meta(charset='utf-8')
+  link(rel='stylesheet' href='stylesheets/main.css')
+.wrapper
+  header
+    .logo
+  .content
+    .main_buttons_wrapper
+      button.main_sign_in_button 로그인하기
+  footer
+    .footer_content
+script(type='module' src='/javascripts/main.js')

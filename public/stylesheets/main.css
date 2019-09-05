@@ -41,7 +41,7 @@ footer{
 .footer_content{
     width: 230px;
     height: 45px;
-    background: url(../img/footer.png) no-repeat;
+    background: url(/images/footer.png) no-repeat;
     background-size: 250px 30px;
 }
 .content{
