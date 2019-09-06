@@ -324,8 +324,17 @@ input[id="term_checkbox"]{
 }
 
 /* interest tag */
+.tag_component_wrapper{
+    min-height: 7%;
+    width: 100%;
+}
 #tag_wrapper{
     display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    height: auto;
+    min-height: 35px;
 }
 #tag_wrapper .tag{
     height: 40%;
