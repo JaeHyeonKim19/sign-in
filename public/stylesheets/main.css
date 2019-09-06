@@ -221,7 +221,7 @@ input[id="term_checkbox"] + label {
 	cursor: pointer;
 }
 input[id="term_checkbox"]:checked + label {
-    background: url(../img/checked_img.png);
+    background: url(/images/checked_img.png);
     background-size: 100% 100%;
 }
 input[id="term_checkbox"]{
