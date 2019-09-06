@@ -1,5 +1,5 @@
 const interestTag = {
-    makeTagFrame : (interest) => {
+    makeTagFrame(interest){
         return /*html*/ `
         <div class="tag">
             <span class='tag_value'>${interest}</span>
@@ -8,7 +8,7 @@ const interestTag = {
         `;
     },
     tags : [],
-    insertTagHandler : () => {
+    insertTagHandler(){
         const tagWrapper = document.getElementById('tag_wrapper');
         const interestInput = document.querySelector('#tag_input');
         let interestInputValue = ``;
@@ -16,8 +16,15 @@ const interestTag = {
             if(e.key===','){
                 interestInputValue = interestInput.value;
                 interestInputValue = interestInputValue.substring(0, interestInputValue.length-1);
-                interestTag.tags.push(interestInputValue);
-                interestTag.listTags(interestInput, tagWrapper);
+                const interestMessage = document.querySelector('#interest_message');
+                if(!interestTag.isTagDuplicated(interestInputValue)){
+                    interestTag.tags.push(interestInputValue);
+                    interestTag.listTags(interestInput, tagWrapper);
+                    interestMessage.innerHTML = ``;
+                }else{
+                    interestMessage.innerHTML = `이미 입력한 관심사입니다.`;
+                    interestInput.value = interestInputValue;
+                }
             }
         });
     },
@@ -45,6 +52,13 @@ const interestTag = {
                 interestTag.listTags(interestInput, tagWrapper);
             });
         }
+    },
+    isTagDuplicated(interestInputValue){
+        let isDuplicated = false;
+        for(let tag of interestTag.tags){
+            if(tag===interestInputValue) isDuplicated = true;
+        }
+        return isDuplicated
     }
 }
 
