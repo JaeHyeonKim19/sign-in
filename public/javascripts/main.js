@@ -1,3 +1,3 @@
-import {registerSignInEvent} from './signIn/signIn.js';
+import {signInHandler} from './signIn/signIn.js';
 
-registerSignInEvent();
+signInHandler();

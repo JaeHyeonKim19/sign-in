@@ -3,7 +3,7 @@ import {termModalHtml} from './termModalHtml.js';
 import {util} from '../util.js';
 
 const signUpMessageMaker = {
-    makeSigUpIdMessageEvent : (idValue, idMessage) => {
+    makeSigUpIdMessage : (idValue, idMessage) => {
         let message = `사용가능한 아이디입니다.`;
         idMessage.style.color = `rgb(90, 194, 102)`;
         if(!/^[a-z0-9-_]{5,20}$/g.test(idValue)){
@@ -12,7 +12,7 @@ const signUpMessageMaker = {
         }
         return [idMessage, message];
     },
-    makeSignUpPwMessageEvent : (pwValue, pwMessage) => {
+    makeSignUpPwMessage : (pwValue, pwMessage) => {
         let message = ``;
         pwMessage.style.color = `red`;
         if(!/^.{8,16}$/.test(pwValue)){
@@ -29,7 +29,7 @@ const signUpMessageMaker = {
         }
         return [pwMessage, message];
     },
-    makeSignUpPwCheckMessageEvent : (pwCheckValue, pwValue, pwCheckMessage) => {
+    makeSignUpPwCheckMessage : (pwCheckValue, pwValue, pwCheckMessage) => {
         let message = `비밀번호가 일치합니다.`;
         pwCheckMessage.style.color = `rgb(90, 194, 102)`;
         if(pwValue===''){
@@ -41,7 +41,7 @@ const signUpMessageMaker = {
         }
         return [pwCheckMessage, message];
     },
-    makeBirthMessageEvent : (birthYearValue, birthMonthValue, birthDateValue, birthMessage) => {
+    makeBirthMessage : (birthYearValue, birthMonthValue, birthDateValue, birthMessage) => {
         let message = ``;
         const currentTime = new Date();
         const currentYear = currentTime.getFullYear();
@@ -65,14 +65,14 @@ const signUpMessageMaker = {
         }
         return [birthMessage, message];
     },
-    makeEmailMessageEvent : (emailValue, emailMessage) => {
+    makeEmailMessage : (emailValue, emailMessage) => {
         let message = ``;
         if(!/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/.test(emailValue)){
             message = `이메일 주소를 다시 확인해주세요.`;
         }
         return [emailMessage, message];
     },
-    makePhoneMessageEvent : (phoneValue, phoneMessage) => {
+    makePhoneMessage : (phoneValue, phoneMessage) => {
         let message = ``;
         if(!/^010[0-9]{7,8}$/.test(phoneValue)){
             message = `형식에 맞지 않는 번호입니다.`;
@@ -81,26 +81,26 @@ const signUpMessageMaker = {
     }
 }
 
-const signUpValidationRegister = {
-    registerSignUpIdMessageEvent : () => {
+const signUpValidationHandler = {
+    signUpIdMessageHandler : () => {
         const idInput = document.querySelector('#id_input');
         const idMessage = document.querySelector('#id_message');
         let idValue = ``;
         idInput.addEventListener('blur', () => {
             idValue = idInput.value;
-            util.printMessage(signUpMessageMaker.makeSigUpIdMessageEvent(idValue, idMessage));
+            util.printMessage(signUpMessageMaker.makeSigUpIdMessage(idValue, idMessage));
         });
     },
-    registerSignUpPwMessageEvent : () => {
+    signUpPwMessageHandler : () => {
         const pwInput = document.querySelector('#pw_input');
         const pwMessage = document.querySelector('#pw_message');
         let pwValue = ``;
         pwInput.addEventListener('blur', () => {
             pwValue = pwInput.value;
-            util.printMessage(signUpMessageMaker.makeSignUpPwMessageEvent(pwValue, pwMessage));
+            util.printMessage(signUpMessageMaker.makeSignUpPwMessage(pwValue, pwMessage));
         });
     },
-    registerSignUpPwCheckMessageEvent : () => {
+    signUpPwCheckMessageHandler : () => {
         const pwCheckInput = document.querySelector('#pw_check_input');
         const pwInput = document.querySelector('#pw_input');
         const pwCheckMessage = document.querySelector('#pw_check_message');
@@ -109,10 +109,10 @@ const signUpValidationRegister = {
         pwCheckInput.addEventListener('blur', () => {
             pwCheckValue = pwCheckInput.value;
             pwValue = pwInput.value;
-            util.printMessage(signUpMessageMaker.makeSignUpPwCheckMessageEvent(pwCheckValue, pwValue, pwCheckMessage));
+            util.printMessage(signUpMessageMaker.makeSignUpPwCheckMessage(pwCheckValue, pwValue, pwCheckMessage));
         });
     },
-    registerBirthMessageEvent : () => {
+    birthMessageHandler : () => {
         const birthYearInput = document.querySelector('#birth_year_input');
         const birthMonthMenu = document.querySelector('.birth_month_dropmenu');
         const birthDateInput = document.querySelector('#birth_date_input');
@@ -124,32 +124,32 @@ const signUpValidationRegister = {
                 birthYearValue = birthYearInput.value;
                 birthMonthValue = Number(birthMonthMenu.options[birthMonthMenu.selectedIndex].value);
                 birthDateValue = Number(birthDateInput.value);
-                util.printMessage(signUpMessageMaker.makeBirthMessageEvent(birthYearValue, birthMonthValue, birthDateValue, birthMessage));
+                util.printMessage(signUpMessageMaker.makeBirthMessage(birthYearValue, birthMonthValue, birthDateValue, birthMessage));
             });
         });
     },
-    registerEmailMessageEvent : () => {
+    emailMessageHandler : () => {
         const emailInput = document.querySelector('#email_input');
         const emailMessage = document.querySelector('#email_message');
         let emailValue = ``;
         emailInput.addEventListener('blur', () => {
             emailValue = emailInput.value;
-            util.printMessage(signUpMessageMaker.makeEmailMessageEvent(emailValue, emailMessage));
+            util.printMessage(signUpMessageMaker.makeEmailMessage(emailValue, emailMessage));
         });
     },
-    registerPhoneMessageEvent : () => {
+    phoneMessageHandler : () => {
         const phoneInput = document.querySelector('#phone_input');
         const phoneMessage = document.querySelector('#phone_message');
         let phoneValue = ``;
         phoneInput.addEventListener('blur', () => {
             phoneValue = phoneInput.value;
-            util.printMessage(signUpMessageMaker.makePhoneMessageEvent(phoneValue, phoneMessage));
+            util.printMessage(signUpMessageMaker.makePhoneMessage(phoneValue, phoneMessage));
         });
     }
 }
 
 const termModal = {
-    registerTermModalPopupEvent : () => {
+    termModalPopupHandler : () => {
         const termLink = document.querySelector('.term_link');
         termLink.addEventListener('click', () => {
             document.body.insertAdjacentHTML('beforeend', termModalHtml);
@@ -157,13 +157,13 @@ const termModal = {
             termModal.registerTermAgreeEvent();
         });
     },
-    registerTermModalCloseEvent : () => {
+    termModalCloseHandler : () => {
         const xDiv = document.querySelector('.x');
         xDiv.addEventListener('click', () => {
             termModal.deleteModalPopup();
         });
     },
-    registerTermAgreeEvent : () => {
+    termAgreeHandler : () => {
         const agreementButton = document.querySelector('#agreement_button');
         agreementButton.addEventListener('click', () => {
             termModal.deleteModalPopup();
@@ -188,7 +188,7 @@ const interestTag = {
         `;
         return tagFrame;
     },
-    insertTagEvent : () => {
+    insertTagHandler : () => {
         const tagWrapper = document.getElementById('tag_wrapper');
         const interestInput = document.querySelector('#tag_input');
         let interestInputValue = ``;
@@ -206,17 +206,17 @@ const interestTag = {
     }
 }
 
-const registerSignUpEvent = () => {
+const signUpHandler = () => {
     const signUpLink = document.querySelector('.sign_up');
     signUpLink.addEventListener('click', () => {
         document.body.innerHTML = signUpHtml;
         // sign up events
-        for(let register in signUpValidationRegister){
-            signUpValidationRegister[register]();
+        for(let handler in signUpValidationHandler){
+            signUpValidationHandler[handler]();
         }
-        termModal.registerTermModalPopupEvent();
-        interestTag.insertTagEvent();
+        termModal.termModalPopupHandler();
+        interestTag.insertTagHandler();
     });
 }
 
-export {registerSignUpEvent};
+export {signUpHandler};

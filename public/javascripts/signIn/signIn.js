@@ -1,5 +1,5 @@
 import {signInHtml} from './signInHtml.js';
-import {registerSignUpEvent} from '../signUp/signUp.js';
+import {signUpHandler} from '../signUp/signUp.js';
 import {util} from '../util.js';
 
 const makeSignInIdMessage = (idValue, idMessage) => {
@@ -10,7 +10,7 @@ const makeSignInIdMessage = (idValue, idMessage) => {
     return [idMessage, message];
 }
 
-const registerSignInIdMessageEvent = () => {
+const signInIdMessageHandler = () => {
     const idInputBox = document.querySelector('.id_inputbox');
     const idMessage = document.querySelector('.sign_in_id_message');
     let idValue = ``;
@@ -20,14 +20,14 @@ const registerSignInIdMessageEvent = () => {
     })
 }
 
-const registerSignInEvent = () => {
+const signInHandler = () => {
     const signInButton = document.querySelector('.main_sign_in_button');
     signInButton.addEventListener('click', () => {
         document.body.innerHTML = signInHtml;
         // sign in events
-        registerSignInIdMessageEvent();
-        registerSignUpEvent();
+        signInIdMessageHandler();
+        signUpHandler();
     });
 }
 
-export {registerSignInEvent};
+export {signInHandler};
