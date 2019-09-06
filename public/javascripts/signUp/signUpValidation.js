@@ -76,6 +76,13 @@ const signUpMessageMaker = {
             message = `형식에 맞지 않는 번호입니다.`;
         }
         return [phoneMessage, message];
+    },
+    makeInterestMessage(interestMessage){
+        const tags = document.querySelectorAll('.tag');
+        let message = ``;
+        const tagCount = tags.length;
+        if(tagCount<3) message = `3개 이상의 관심사를 입력하세요.`;
+        return [interestMessage, message];
     }
 }
 
@@ -142,6 +149,13 @@ const signUpValidationHandler = {
         phoneInput.addEventListener('blur', () => {
             phoneValue = phoneInput.value;
             util.printMessage(signUpMessageMaker.makePhoneMessage(phoneValue, phoneMessage));
+        });
+    },
+    interestMessageHandler(){
+        const interestMessage = document.querySelector('#interest_message');
+        const interestInput = document.querySelector('#tag_input');
+        interestInput.addEventListener('blur', () => {
+            util.printMessage(signUpMessageMaker.makeInterestMessage(interestMessage));
         });
     }
 }
