@@ -1,4 +1,4 @@
-const signUpHtml = `
+const signUpHtml = /*html*/`
 <div class="wrapper">
     <header>
         <div class="title">회원가입</div>
@@ -88,7 +88,7 @@ const signUpHtml = `
                     </div>
                     <div id="phone_message" class="message"></div>
                 </div>
-                <div class="component_wrapper">
+                <div class="tag_component_wrapper">
                     <label>관심사</label>
                     <div id="tag_wrapper" class="info">
                         <input id="tag_input" class="input">
