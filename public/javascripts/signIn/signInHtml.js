@@ -1,4 +1,4 @@
-const signInHtml = `
+const signInHtml = /* html */`
 <div class="wrapper">
     <header>
         <div class="logo"></div>
@@ -16,7 +16,7 @@ const signInHtml = `
                     <input type="password" placeholder="비밀번호" class="pw_inputbox">
                 </div>
                 <button class="login_button">로그인</button>
-                <a class="sign_up" href="#">회원가입</a>
+                <a class="sign_up" href="#signup">회원가입</a>
             </form>
         </div>
     </div>
