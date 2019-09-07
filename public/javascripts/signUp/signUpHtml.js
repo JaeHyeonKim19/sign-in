@@ -30,7 +30,7 @@ const signUpHtml = /*html*/`
                 <div class="component_wrapper">
                     <label>이름</label>
                     <div class="info">
-                        <input class="input">
+                        <input id="name_input" class="input">
                     </div>
                     <div id="name_message" class="message"></div>
                 </div>
