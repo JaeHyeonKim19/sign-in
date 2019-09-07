@@ -12,7 +12,7 @@ const signUpHandler = () => {
             signUpValidationHandler[handler]();
         }
         termModal.termModalPopupHandler();
-        interestTag.insertTagHandler();
+        interestTag.tagHandler();
     });
 }
 
