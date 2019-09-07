@@ -17,6 +17,10 @@ const interestTag = {
             if(e.key===','){
                 interestInputValue = interestInput.value;
                 interestInputValue = interestInputValue.substring(0, interestInputValue.length-1);
+                if(interestInputValue==='') {
+                    interestInput.value='';
+                    return;
+                }
                 const interestMessage = document.querySelector('#interest_message');
                 if(!interestTag.isTagDuplicated(interestInputValue)){
                     interestTag.tags.push(interestInputValue);
