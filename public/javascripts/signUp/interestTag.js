@@ -8,10 +8,11 @@ const interestTag = {
         `;
     },
     tags : [],
-    insertTagHandler(){
+    tagHandler(){
         const tagWrapper = document.getElementById('tag_wrapper');
         const interestInput = document.querySelector('#tag_input');
         let interestInputValue = ``;
+        let previousValue = ``;
         tagWrapper.addEventListener('keyup', (e) => {
             if(e.key===','){
                 interestInputValue = interestInput.value;
@@ -20,12 +21,16 @@ const interestTag = {
                 if(!interestTag.isTagDuplicated(interestInputValue)){
                     interestTag.tags.push(interestInputValue);
                     interestTag.listTags(interestInput, tagWrapper);
+                    interestInput.value = '';
                     interestMessage.innerHTML = ``;
                 }else{
                     interestMessage.innerHTML = `이미 입력한 관심사입니다.`;
                     interestInput.value = interestInputValue;
                 }
+            }else if((e.key==='Backspace' || e.key==='Delete') && interestTag.isPreviousInputEmpty(previousValue)){
+                interestTag.modifyPreviousTag(interestInput, tagWrapper);
             }
+            previousValue = interestInput.value;
         });
     },
     listTags(interestInput, tagWrapper){
@@ -38,7 +43,6 @@ const interestTag = {
             tagHTML = interestTag.makeTagFrame(tag); 
             interestInput.insertAdjacentHTML('beforebegin', tagHTML);
         }
-        interestInput.value = '';
         interestTag.removeTagHandler(interestInput, tagWrapper);
     },
     removeTagHandler(interestInput, tagWrapper){
@@ -59,6 +63,15 @@ const interestTag = {
             if(tag===interestInputValue) isDuplicated = true;
         }
         return isDuplicated
+    },
+    modifyPreviousTag(interestInput, tagWrapper){
+        const inputValue = interestTag.tags.pop();
+        console.log(inputValue);
+        interestInput.value = inputValue;
+        interestTag.listTags(interestInput, tagWrapper);
+    },
+    isPreviousInputEmpty(previousValue){
+        return !previousValue;
     }
 }
 
