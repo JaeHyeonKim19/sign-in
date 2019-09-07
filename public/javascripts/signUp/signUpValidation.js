@@ -39,6 +39,13 @@ const signUpMessageMaker = {
         }
         return [pwCheckMessage, message];
     },
+    makeNameMessage : (nameInputValue, nameMessage) => {
+        let message = ``;
+        if(nameInputValue===''){
+            message = `이름을 입력하세요`;
+        }
+        return [nameMessage, message];
+    },
     makeBirthMessage : (birthYearValue, birthMonthValue, birthDateValue, birthMessage) => {
         let message = ``;
         const currentTime = new Date();
@@ -117,6 +124,13 @@ const signUpValidationHandler = {
             util.printMessage(signUpMessageMaker.makeSignUpPwCheckMessage(pwCheckValue, pwValue, pwCheckMessage));
         });
     },
+    nameMessageHandler : () => {
+        const nameInput = document.querySelector('#name_input');
+        const nameMessage = document.querySelector('#name_message');
+        nameInput.addEventListener('blur', () => {
+            util.printMessage(signUpMessageMaker.makeNameMessage(nameInput.value, nameMessage));
+        });
+    },
     birthMessageHandler : () => {
         const birthYearInput = document.querySelector('#birth_year_input');
         const birthMonthMenu = document.querySelector('.birth_month_dropmenu');
@@ -160,4 +174,4 @@ const signUpValidationHandler = {
     }
 }
 
-export {signUpValidationHandler};
+export {signUpValidationHandler, signUpMessageMaker};
