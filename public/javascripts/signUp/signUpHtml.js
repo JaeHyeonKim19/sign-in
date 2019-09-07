@@ -101,8 +101,8 @@ const signUpHtml = /*html*/`
                     <label for="term_checkbox"></label>
                 </div>
                 <div class="button_wrapper">
-                    <button id="init">초기화</button>
-                    <button id="sign_up_button">가입하기</button>
+                    <button type="button" id="init">초기화</button>
+                    <button type="button" id="sign_up_button">가입하기</button>
                 </div>
             </form>
         </div>
