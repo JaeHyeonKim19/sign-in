@@ -2,6 +2,7 @@ import {signUpHtml} from './signUpHtml.js';
 import {signUpValidationHandler} from './signUpValidation.js';
 import {termModal} from './termModal.js';
 import {interestTag} from './interestTag.js';
+import {reset} from './reset.js';
 
 const signUpHandler = () => {
     const signUpLink = document.querySelector('.sign_up');
@@ -13,6 +14,7 @@ const signUpHandler = () => {
         }
         termModal.termModalPopupHandler();
         interestTag.tagHandler();
+        reset.registerResetEvent();
     });
 }
 
