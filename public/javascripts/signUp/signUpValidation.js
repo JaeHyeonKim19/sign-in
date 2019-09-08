@@ -1,16 +1,25 @@
 import {util} from '../util.js';
 
 const signUpMessageMaker = {
-    makeSigUpIdMessage : (idValue, idMessage) => {
+    makeSigUpIdMessage : () => {
+        const idInput = document.querySelector('#id_input');
+        const idMessage = document.querySelector('#id_message');
+        const idValue = idInput.value;
+        let result = true;
         let message = `사용가능한 아이디입니다.`;
         idMessage.style.color = `rgb(90, 194, 102)`;
         if(!/^[a-z0-9-_]{5,20}$/g.test(idValue)){
             idMessage.style.color = `rgb(255, 0, 0)`;
             message = '5~20자의 영문 소문자, 숫자와 특수기호(_)(-) 만 사용 가능합니다.';
+            result = false;
         }
-        return [idMessage, message];
+        return [idMessage, message, result];
     },
-    makeSignUpPwMessage : (pwValue, pwMessage) => {
+    makeSignUpPwMessage : () => {
+        const pwInput = document.querySelector('#pw_input');
+        const pwMessage = document.querySelector('#pw_message');
+        const pwValue = pwInput.value;
+        let result = false;
         let message = ``;
         pwMessage.style.color = `red`;
         if(!/^.{8,16}$/.test(pwValue)){
@@ -23,30 +32,52 @@ const signUpMessageMaker = {
             message = `특수문자를 최소 1자 이상 포함해주세요.`;
         }else{
             message = `안전한 비밀번호입니다.`;
+            result = true;
             pwMessage.style.color = `rgb(90, 194, 102)`;
         }
-        return [pwMessage, message];
+        return [pwMessage, message, result];
     },
-    makeSignUpPwCheckMessage : (pwCheckValue, pwValue, pwCheckMessage) => {
+    makeSignUpPwCheckMessage : () => {
+        const pwCheckInput = document.querySelector('#pw_check_input');
+        const pwInput = document.querySelector('#pw_input');
+        const pwCheckMessage = document.querySelector('#pw_check_message');
+        const pwCheckValue = pwCheckInput.value;
+        const pwValue = pwInput.value;
+        let result = true;
         let message = `비밀번호가 일치합니다.`;
         pwCheckMessage.style.color = `rgb(90, 194, 102)`;
         if(pwValue===''){
             message = `비밀번호를 입력해주세요.`;
             pwCheckMessage.style.color = `red`;
+            result = false;
         }else if(pwCheckValue!==pwValue){
             message = `비밀번호가 일치하지 않습니다.`;
             pwCheckMessage.style.color = `red`;
+            result = false;
         }
-        return [pwCheckMessage, message];
+        return [pwCheckMessage, message, result];
     },
-    makeNameMessage : (nameInputValue, nameMessage) => {
+    makeNameMessage : () => {
+        const nameInput = document.querySelector('#name_input');
+        const nameMessage = document.querySelector('#name_message');
+        const nameInputValue = nameInput.value;
+        let result = true;
         let message = ``;
         if(nameInputValue===''){
             message = `이름을 입력하세요`;
+            result = false;
         }
-        return [nameMessage, message];
+        return [nameMessage, message, result];
     },
-    makeBirthMessage : (birthYearValue, birthMonthValue, birthDateValue, birthMessage) => {
+    makeBirthMessage : () => {
+        const birthMessage = document.querySelector('#birth_message');
+        const birthYearInput = document.querySelector('#birth_year_input');
+        const birthMonthMenu = document.querySelector('.birth_month_dropmenu');
+        const birthDateInput = document.querySelector('#birth_date_input');
+        const birthYearValue = birthYearInput.value;
+        const birthMonthValue = Number(birthMonthMenu.options[birthMonthMenu.selectedIndex].value);
+        const birthDateValue = Number(birthDateInput.value);
+        let result = true;
         let message = ``;
         const currentTime = new Date();
         const currentYear = currentTime.getFullYear();
@@ -55,123 +86,168 @@ const signUpMessageMaker = {
         const age = currentYear - birthYearValue + 1;
         if(!(/^[0-9]{4}$/.test(birthYearValue)) || age>99){
             message = `태어난 년도 4자리를 정확하게 입력하세요.`;
+            result = false;
         }else if(isNaN(birthMonthValue)){
             message = `월을 선택해주세요.`;
+            result = false;
         }else if(birthDateValue<1 || birthDateValue>32 - new Date(birthYearValue, birthMonthValue-1, 32).getDate()){
             message = `태어난 날짜를 다시 확인해주세요.`;
+            result = false;
         }else if(age<=15){
             message = `만 14세 이상만 가입 가능합니다.`;
+            result = false;
             if(age===15 && currentMonth>=birthMonthValue){
                 message = ``;
+                result = true;
                 if(currentMonth===birthMonthValue && currentDate<=birthDateValue){
                     message = `만 14세 이상만 가입 가능합니다.`;
+                    result = false;
                 }
             }
         }
-        return [birthMessage, message];
+        return [birthMessage, message, result];
     },
-    makeEmailMessage : (emailValue, emailMessage) => {
+    makeGenderMessage : () => {
+        const genderMessage = document.querySelector('#gender_dropmenu_message');
+        const genderMenu = document.querySelector('.gender_dropmenu');
+        const genderValue = genderMenu.options[genderMenu.selectedIndex].value;
+        let result = true;
+        let message = ``;
+        if(genderValue!=='M' && genderValue!=='F'){
+            message = `성별을 선택해주세요.`;
+            result = false;
+        }
+        return [genderMessage, message, result]
+    },
+    makeEmailMessage : () => {
+        const emailMessage = document.querySelector('#email_message');
+        const emailInput = document.querySelector('#email_input');
+        const emailValue = emailInput.value;
+        let result = true;
         let message = ``;
         if(!/^[a-z0-9_+.-]+@([a-z0-9-]+\.)+[a-z0-9]{2,4}$/.test(emailValue)){
             message = `이메일 주소를 다시 확인해주세요.`;
+            result = false;
         }
-        return [emailMessage, message];
+        return [emailMessage, message, result];
     },
-    makePhoneMessage : (phoneValue, phoneMessage) => {
+    makePhoneMessage : () => {
+        const phoneMessage = document.querySelector('#phone_message');
+        const phoneInput = document.querySelector('#phone_input');
+        const phoneValue = phoneInput.value;
+        let result = true;
         let message = ``;
         if(!/^010[0-9]{7,8}$/.test(phoneValue)){
             message = `형식에 맞지 않는 번호입니다.`;
+            result = false;
         }
-        return [phoneMessage, message];
+        return [phoneMessage, message, result];
     },
-    makeInterestMessage(interestMessage){
+    makeInterestMessage(){
+        const interestMessage = document.querySelector('#interest_message');
         const tags = document.querySelectorAll('.tag');
+        let result = true;
         let message = ``;
         const tagCount = tags.length;
-        if(tagCount<3) message = `3개 이상의 관심사를 입력하세요.`;
-        return [interestMessage, message];
+        if(tagCount<3) {
+            message = `3개 이상의 관심사를 입력하세요.`;
+            result = false;
+        }
+        return [interestMessage, message, result];
+    },
+    makeAgreementMessage(){
+        const agreementMessage = document.querySelector('#agreement_message');
+        const checkbox = document.querySelector('#term_checkbox');
+        const isChecked = checkbox.checked;
+        let message = ``;
+        if(!isChecked) message = `약관에 동의해주세요.`;
+        return [agreementMessage, message, isChecked];
     }
 }
 
 const signUpValidationHandler = {
     signUpIdMessageHandler : () => {
         const idInput = document.querySelector('#id_input');
-        const idMessage = document.querySelector('#id_message');
-        let idValue = ``;
         idInput.addEventListener('blur', () => {
-            idValue = idInput.value;
-            util.printMessage(signUpMessageMaker.makeSigUpIdMessage(idValue, idMessage));
+            util.printMessage(signUpMessageMaker.makeSigUpIdMessage());
         });
     },
     signUpPwMessageHandler : () => {
         const pwInput = document.querySelector('#pw_input');
-        const pwMessage = document.querySelector('#pw_message');
-        let pwValue = ``;
         pwInput.addEventListener('blur', () => {
-            pwValue = pwInput.value;
-            util.printMessage(signUpMessageMaker.makeSignUpPwMessage(pwValue, pwMessage));
+            util.printMessage(signUpMessageMaker.makeSignUpPwMessage());
         });
     },
     signUpPwCheckMessageHandler : () => {
         const pwCheckInput = document.querySelector('#pw_check_input');
-        const pwInput = document.querySelector('#pw_input');
-        const pwCheckMessage = document.querySelector('#pw_check_message');
-        let pwCheckValue = ``;
-        let pwValue = ``;
         pwCheckInput.addEventListener('blur', () => {
-            pwCheckValue = pwCheckInput.value;
-            pwValue = pwInput.value;
-            util.printMessage(signUpMessageMaker.makeSignUpPwCheckMessage(pwCheckValue, pwValue, pwCheckMessage));
+            util.printMessage(signUpMessageMaker.makeSignUpPwCheckMessage());
         });
     },
     nameMessageHandler : () => {
         const nameInput = document.querySelector('#name_input');
-        const nameMessage = document.querySelector('#name_message');
         nameInput.addEventListener('blur', () => {
-            util.printMessage(signUpMessageMaker.makeNameMessage(nameInput.value, nameMessage));
+            util.printMessage(signUpMessageMaker.makeNameMessage());
         });
     },
     birthMessageHandler : () => {
         const birthYearInput = document.querySelector('#birth_year_input');
         const birthMonthMenu = document.querySelector('.birth_month_dropmenu');
         const birthDateInput = document.querySelector('#birth_date_input');
-        const birthMessage = document.querySelector('#birth_message');
         const birthInput = [birthYearInput, birthMonthMenu, birthDateInput];
-        let birthYearValue, birthMonthValue, birthDateValue = ``;
         birthInput.forEach((element) => {
             element.addEventListener('blur', () => {
-                birthYearValue = birthYearInput.value;
-                birthMonthValue = Number(birthMonthMenu.options[birthMonthMenu.selectedIndex].value);
-                birthDateValue = Number(birthDateInput.value);
-                util.printMessage(signUpMessageMaker.makeBirthMessage(birthYearValue, birthMonthValue, birthDateValue, birthMessage));
+                util.printMessage(signUpMessageMaker.makeBirthMessage());
             });
+        });
+    },
+    genderMessageHandler : () => {
+        const genderMenu = document.querySelector('.gender_dropmenu');
+        genderMenu.addEventListener('blur', () => {
+            util.printMessage(signUpMessageMaker.makeGenderMessage());
         });
     },
     emailMessageHandler : () => {
         const emailInput = document.querySelector('#email_input');
-        const emailMessage = document.querySelector('#email_message');
-        let emailValue = ``;
         emailInput.addEventListener('blur', () => {
-            emailValue = emailInput.value;
-            util.printMessage(signUpMessageMaker.makeEmailMessage(emailValue, emailMessage));
+            util.printMessage(signUpMessageMaker.makeEmailMessage());
         });
     },
     phoneMessageHandler : () => {
         const phoneInput = document.querySelector('#phone_input');
-        const phoneMessage = document.querySelector('#phone_message');
-        let phoneValue = ``;
         phoneInput.addEventListener('blur', () => {
-            phoneValue = phoneInput.value;
-            util.printMessage(signUpMessageMaker.makePhoneMessage(phoneValue, phoneMessage));
+            util.printMessage(signUpMessageMaker.makePhoneMessage());
         });
     },
-    interestMessageHandler(){
-        const interestMessage = document.querySelector('#interest_message');
+    interestMessageHandler : () => {
         const interestInput = document.querySelector('#tag_input');
         interestInput.addEventListener('blur', () => {
-            util.printMessage(signUpMessageMaker.makeInterestMessage(interestMessage));
+            util.printMessage(signUpMessageMaker.makeInterestMessage());
         });
+    },
+    confirmValidator : () => {
+        const signUpButton = document.querySelector('#sign_up_button');
+        signUpButton.addEventListener('click', () => {
+            const result = finalConfirm();
+            if(result){
+                console.log('통과');
+            }else{
+                console.log('통과안됨;;');
+            }
+        });
+
     }
+}
+
+const finalConfirm = () => {
+    let messageObject = [];
+    let result = true;
+    for(let messageMaker in signUpMessageMaker){
+        messageObject = signUpMessageMaker[messageMaker]();
+        util.printMessage(messageObject);
+        if(result===true) result = messageObject[2];
+    }
+    return result;
 }
 
 export {signUpValidationHandler, signUpMessageMaker};

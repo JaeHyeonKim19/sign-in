@@ -95,10 +95,13 @@ const signUpHtml = /*html*/`
                     </div>
                     <div id="interest_message" class="message"></div>
                 </div>
-                <div class="agreement_wrapper">
-                    <a class="term_link" href="#">약관에 동의합니다.</a>
-                    <input type="checkbox" disabled=true id="term_checkbox">
-                    <label for="term_checkbox"></label>
+                <div class="component_wrapper">
+                    <div class="agreement_wrapper">
+                        <a class="term_link" href="#">약관에 동의합니다.</a>
+                        <input type="checkbox" disabled=true id="term_checkbox">
+                        <label for="term_checkbox"></label>
+                    </div>
+                    <div id="agreement_message" class="message"></div>
                 </div>
                 <div class="button_wrapper">
                     <button type="button" id="init">초기화</button>
