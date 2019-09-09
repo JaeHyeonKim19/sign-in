@@ -37,7 +37,7 @@ router.post('/', function(req, res, next){
       };
       const expireTime = new Date(Date.now() + 60000);
       cookieValue.expireTime = expireTime;
-      res.cookie('membership', cookieValue, {expires : expireTime});
+      res.cookie('membership', sessionId, {expires : expireTime});
       db.get('session')
       .push(cookieValue)
       .write();

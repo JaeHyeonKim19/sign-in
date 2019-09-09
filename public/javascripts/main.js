@@ -18,8 +18,7 @@ const mainInit = () => {
     .then(json => {
         if(json.result){
             const signInButton = '<button type="button" class="main_sign_in_button">로그인하기</button>';
-            const data = decodeURI(document.cookie).split('"');
-            const name = data[11];
+            const name = json.name;
             const nameDiv = `<div>${name}님 안녕하세요. 추가 기능은 준비중 입니다.</div>`;
             const newMainHtml = mainHtml.replace(signInButton, nameDiv);
             document.body.innerHTML = newMainHtml;

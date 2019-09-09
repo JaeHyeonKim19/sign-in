@@ -22,12 +22,17 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next){
   if(req.body.type==='cookieCheck'){
-    const data = unescape(req.body.data).split('"');
-    const sessionId = data[3];
+    const data = unescape(req.body.data).split('=');
+    const sessionId = data[1];
     const selectResult = db.get('session')
     .find({sessionId : sessionId})
     .value();
-    res.send({result : !!selectResult});
+    const returnValue = {result : !!selectResult};
+    if(!!selectResult) {
+      returnValue.name = selectResult.name;
+      returnValue.id = selectResult.id;
+    }
+    res.send(returnValue);
   }
   next();
 });
