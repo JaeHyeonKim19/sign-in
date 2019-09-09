@@ -1,0 +1,19 @@
+{
+  "member": [
+    {
+      "id": "realgogo",
+      "pwd": "Test1111!",
+      "name": "test1",
+      "birth": "1993021",
+      "gender": "M",
+      "email": "dfsdfads@asdfasfd.co",
+      "phone": "01023232323",
+      "interest": [
+        "d",
+        "c",
+        "e"
+      ]
+    }
+  ],
+  "session": []
+}
