@@ -1,7 +1,7 @@
 import {util} from '../util.js';
 
 const signUpMessageMaker = {
-    makeSigUpIdMessage : () => {
+    makeSigUpIdMessage : async () => {
         const idInput = document.querySelector('#id_input');
         const idMessage = document.querySelector('#id_message');
         const idValue = idInput.value;
@@ -12,6 +12,31 @@ const signUpMessageMaker = {
             idMessage.style.color = `rgb(255, 0, 0)`;
             message = '5~20자의 영문 소문자, 숫자와 특수기호(_)(-) 만 사용 가능합니다.';
             result = false;
+        }else{
+            const currentUrl = document.location.href;
+            await fetch(currentUrl, {
+                method: 'POST',
+                headers: {
+                    Accept : "application/json",
+                    "Content-Type" : "application/json"
+                },
+                body: JSON.stringify({
+                    id : idValue
+                })
+            })
+            .then(response => response.json())
+            .then(json => {
+                if(json.result){
+                    idMessage.style.color = `rgb(255, 0, 0)`;
+                    message = `이미 사용중인 아이디입니다.`;
+                    result = false;
+                }
+            })
+            .catch((data) => {
+                idMessage.style.color = `rgb(255, 0, 0)`;
+                message = `현재 서버와의 통신이 불가능합니다. 다시 시도해주세요.`;
+                result = false;
+            });
         }
         return [idMessage, message, result];
     },
@@ -168,8 +193,8 @@ const signUpMessageMaker = {
 const signUpValidationHandler = {
     signUpIdMessageHandler : () => {
         const idInput = document.querySelector('#id_input');
-        idInput.addEventListener('blur', () => {
-            util.printMessage(signUpMessageMaker.makeSigUpIdMessage());
+        idInput.addEventListener('blur', async () => {
+            await util.printMessage(await signUpMessageMaker.makeSigUpIdMessage());
         });
     },
     signUpPwMessageHandler : () => {
