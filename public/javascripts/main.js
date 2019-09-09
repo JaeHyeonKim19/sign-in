@@ -18,13 +18,9 @@ const mainInit = () => {
     .then(json => {
         if(json.result){
             const signInButton = '<button type="button" class="main_sign_in_button">로그인하기</button>';
-            console.log(document.cookie);
-            const data = unescape(document.cookie).split('"');
+            const data = decodeURI(document.cookie).split('"');
             const name = data[11];
-            console.log(unescape(document.cookie));
-            console.log(data);
-            console.log(name);
-            const nameDiv = `<div>${name}님 안녕하세요. 참고로 한글은 깨져요ㅎㅎㅎ</div>`;
+            const nameDiv = `<div>${name}님 안녕하세요. 추가 기능은 준비중 입니다.</div>`;
             const newMainHtml = mainHtml.replace(signInButton, nameDiv);
             document.body.innerHTML = newMainHtml;
         }else{
