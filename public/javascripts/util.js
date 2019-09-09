@@ -1,5 +1,5 @@
 const util = {
-    printMessage(messageObject){
+    async printMessage(messageObject){
         messageObject[0].innerHTML = messageObject[1];
     }
 }
