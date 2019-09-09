@@ -1,7 +1,5 @@
 import {util} from '../util.js';
-import {signInHtml} from '../signIn/signInHtml.js';
-import {signInIdMessageHandler} from '../signIn/signIn.js';
-import {signUpHandler} from './signUp.js';
+import {signInHandlerCallBack} from '../signIn/signIn.js';
 
 const signUpMessageMaker = {
     makeSigUpIdMessage : async () => {
@@ -280,9 +278,7 @@ const signUpValidationHandler = {
                 .then(json => {
                     console.log(json);
                     alert('회원가입 완료! 로그인 해주세요.');
-                    document.body.innerHTML = signInHtml;
-                    signInIdMessageHandler();
-                    signUpHandler();
+                    signInHandlerCallBack();
                 })
                 .catch((data) => {
                     alert('에러가 발생했습니다. 다시 시도해주십시오.');

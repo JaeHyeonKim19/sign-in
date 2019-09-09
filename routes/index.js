@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var db = require('../db.js');
 var dbPattern = require('../dbPattern.js');
+var uuid = require('uuid/v4');
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index');
@@ -20,6 +21,30 @@ router.post('/', function(req, res, next){
       .push(dbPattern.member(data[0], data[1], data[3], data[4]+data[5]+data[6], data[7], data[8], data[9], JSON.parse(data[11])))
       .write();
     res.send({result : 'success'});
+  }else if(req.body.type==='signIn'){
+    const loginInform = req.body.data;
+    const selectResult = db.get('member')
+    .find({
+      id : loginInform[0],
+      pwd : loginInform[1]})
+    .value();
+    if(!!selectResult){
+      const sessionId = uuid();
+      let cookieValue = {
+        sessionId : sessionId,
+        id : selectResult.id,
+        name : selectResult.name
+      };
+      const expireTime = new Date(Date.now() + 60000);
+      cookieValue.expireTime = expireTime;
+      res.cookie('membership', cookieValue, {expires : expireTime});
+      db.get('session')
+      .push(cookieValue)
+      .write();
+      res.send({result : true});
+    }else{
+      res.send({result : false});
+    }
   }
 });
 

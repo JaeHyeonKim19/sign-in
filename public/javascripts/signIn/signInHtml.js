@@ -15,7 +15,7 @@ const signInHtml = /* html */`
                 <div class="pw_input_area">
                     <input type="password" placeholder="비밀번호" class="pw_inputbox">
                 </div>
-                <button class="login_button">로그인</button>
+                <button type="button" class="login_button">로그인</button>
                 <a class="sign_up" href="#signup">회원가입</a>
             </form>
         </div>

@@ -1,6 +1,43 @@
 import {signInHandler} from './signIn/signIn.js';
 import {mainHtml} from './mainHtml.js';
 
-document.body.innerHTML = mainHtml;
+const mainInit = () => {
+    const currentUrl = document.location.href;
+    fetch(currentUrl, {
+        method: 'POST',
+        headers: {
+            Accept : "application/json",
+            "Content-Type" : "application/json"
+        },
+        body: JSON.stringify({
+            type : 'cookieCheck',
+            data : document.cookie
+        })
+    })
+    .then(response => response.json())
+    .then(json => {
+        if(json.result){
+            const signInButton = '<button type="button" class="main_sign_in_button">로그인하기</button>';
+            console.log(document.cookie);
+            const data = unescape(document.cookie).split('"');
+            const name = data[11];
+            console.log(unescape(document.cookie));
+            console.log(data);
+            console.log(name);
+            const nameDiv = `<div>${name}님 안녕하세요. 참고로 한글은 깨져요ㅎㅎㅎ</div>`;
+            const newMainHtml = mainHtml.replace(signInButton, nameDiv);
+            document.body.innerHTML = newMainHtml;
+        }else{
+            document.body.innerHTML = mainHtml;
+            signInHandler();
+        }
+    })
+    .catch((data) => {
+        alert('에러가 발생했습니다. 다시 시도해주십시오.');
+    });
+    
+}
 
-signInHandler();
+mainInit();
+
+export {mainInit};
