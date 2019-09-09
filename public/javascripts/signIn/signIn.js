@@ -30,4 +30,4 @@ const signInHandler = () => {
     });
 }
 
-export {signInHandler};
+export {signInHandler, signInIdMessageHandler};
