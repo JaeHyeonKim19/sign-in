@@ -1,4 +1,7 @@
 import {util} from '../util.js';
+import {signInHtml} from '../signIn/signInHtml.js';
+import {signInIdMessageHandler} from '../signIn/signIn.js';
+import {signUpHandler} from './signUp.js';
 
 const signUpMessageMaker = {
     makeSigUpIdMessage : async () => {
@@ -21,6 +24,7 @@ const signUpMessageMaker = {
                     "Content-Type" : "application/json"
                 },
                 body: JSON.stringify({
+                    type : 'duplication',
                     id : idValue
                 })
             })
@@ -255,20 +259,44 @@ const signUpValidationHandler = {
         signUpButton.addEventListener('click', () => {
             const result = finalConfirm();
             if(result){
-                console.log('통과');
-            }else{
-                console.log('통과안됨;;');
+                const form = document.querySelector('.sign_up_form');
+                const inform = [];
+                for(let input of form){
+                    inform.push(input.value);
+                }
+                const currentUrl = document.location.href;
+                fetch(currentUrl, {
+                    method: 'POST',
+                    headers: {
+                        Accept : "application/json",
+                        "Content-Type" : "application/json"
+                    },
+                    body: JSON.stringify({
+                        type : 'signUp',
+                        data : inform
+                    })
+                })
+                .then(response => response.json())
+                .then(json => {
+                    console.log(json);
+                    alert('회원가입 완료! 로그인 해주세요.');
+                    document.body.innerHTML = signInHtml;
+                    signInIdMessageHandler();
+                    signUpHandler();
+                })
+                .catch((data) => {
+                    alert('에러가 발생했습니다. 다시 시도해주십시오.');
+                });
             }
         });
-
     }
 }
 
-const finalConfirm = () => {
+const finalConfirm = async () => {
     let messageObject = [];
     let result = true;
     for(let messageMaker in signUpMessageMaker){
-        messageObject = signUpMessageMaker[messageMaker]();
+        messageObject = await signUpMessageMaker[messageMaker]();
         util.printMessage(messageObject);
         if(result===true) result = messageObject[2];
     }
