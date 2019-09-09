@@ -47,6 +47,8 @@ const interestTag = {
             tagHTML = interestTag.makeTagFrame(tag); 
             interestInput.insertAdjacentHTML('beforebegin', tagHTML);
         }
+        const interestHiddenInput = document.querySelector('#interest_input');
+        interestHiddenInput.value = JSON.stringify(interestTag.tags);
         interestTag.removeTagHandler(interestInput, tagWrapper);
     },
     removeTagHandler(interestInput, tagWrapper){

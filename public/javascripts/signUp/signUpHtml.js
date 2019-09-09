@@ -94,6 +94,7 @@ const signUpHtml = /*html*/`
                         <input id="tag_input" class="input">
                     </div>
                     <div id="interest_message" class="message"></div>
+                    <input type="hidden" id="interest_input">
                 </div>
                 <div class="component_wrapper">
                     <div class="agreement_wrapper">
