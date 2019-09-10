@@ -35,7 +35,7 @@ router.post('/', function(req, res, next){
         id : selectResult.id,
         name : selectResult.name
       };
-      const expireTime = new Date(Date.now() + 60000);
+      const expireTime = new Date(Date.now() + 300000);
       cookieValue.expireTime = expireTime;
       res.cookie('membership', sessionId, {expires : expireTime});
       db.get('session')
@@ -45,6 +45,14 @@ router.post('/', function(req, res, next){
     }else{
       res.send({result : false});
     }
+  }else if(req.body.type==='signOut'){
+    const data = decodeURI(req.body.data).split('=');
+    const sessionId = data[1];
+    db.get('session')
+    .remove({sessionId : sessionId})
+    .write();
+    res.clearCookie('membership', sessionId);
+    res.send({result : true});
   }
 });
 

@@ -92,7 +92,7 @@ footer{
     font-size: 0.75rem;
     color: red;
 }
-.login_button, .main_sign_in_button{
+.login_button, .main_sign_in_button, .main_sign_out_button{
     margin: 0;
     padding: 0;
     height: 35px;

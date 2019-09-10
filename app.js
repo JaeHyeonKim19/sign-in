@@ -22,7 +22,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req, res, next){
   if(req.body.type==='cookieCheck'){
-    const data = unescape(req.body.data).split('=');
+    const data = decodeURI(req.body.data).split('=');
     const sessionId = data[1];
     const selectResult = db.get('session')
     .find({sessionId : sessionId})
