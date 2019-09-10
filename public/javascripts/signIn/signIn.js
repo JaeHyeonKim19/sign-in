@@ -3,6 +3,12 @@ import {signUpHandler} from '../signUp/signUp.js';
 import {util} from '../util.js';
 import {mainInit} from '../main.js';
 
+/**
+ * Make sign in id warning message.
+ *
+ * @param {String} idValue Value of id input.
+ * @return {Array} [idMessage, message] Return array of string and DOM object.
+ */
 const makeSignInIdMessage = (idValue, idMessage) => {
     let message = ``;
     if(idValue==='') {
@@ -11,6 +17,9 @@ const makeSignInIdMessage = (idValue, idMessage) => {
     return [idMessage, message];
 }
 
+/**
+ * Add event to id input.
+ */
 const signInIdMessageHandler = () => {
     const idInputBox = document.querySelector('.id_inputbox');
     const idMessage = document.querySelector('.sign_in_id_message');
@@ -21,11 +30,17 @@ const signInIdMessageHandler = () => {
     })
 }
 
+/**
+ * Add event to login button.
+ */
 const signInButtonHandler = () => {
     const loginButton = document.querySelector('.login_button');
     loginButton.addEventListener('click', signInButtonHandlerCallBack);
 }
 
+/**
+ * Send id and password to server and check its validation.
+ */
 const signInButtonHandlerCallBack = async () => {
     const id = document.querySelector('.id_inputbox').value;
     const pwd = document.querySelector('.pw_inputbox').value;
@@ -56,11 +71,17 @@ const signInButtonHandlerCallBack = async () => {
     });
 }
 
+/**
+ * Add event to sign in button.
+ */
 const signInHandler = () => {
     const signInButton = document.querySelector('.main_sign_in_button');
     signInButton.addEventListener('click', signInHandlerCallBack);
 }
 
+/**
+ * Register events for sign in page.
+ */
 const signInHandlerCallBack = () => {
     document.body.innerHTML = signInHtml;
     // sign in events

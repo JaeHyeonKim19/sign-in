@@ -1,4 +1,10 @@
 const interestTag = {
+    /**
+     * Make tag html.
+     *
+     * @param {String} interest interest value.
+     * @return {String} Return tag html format.
+     */
     makeTagFrame(interest){
         return /*html*/ `
         <div class="tag">
@@ -8,6 +14,9 @@ const interestTag = {
         `;
     },
     tags : [],
+    /**
+     * Register tag event.
+     */
     tagHandler(){
         const tagWrapper = document.getElementById('tag_wrapper');
         const interestInput = document.querySelector('#tag_input');
@@ -37,6 +46,12 @@ const interestTag = {
             previousValue = interestInput.value;
         });
     },
+    /**
+     * Delete existing inerest tags and rearrange tags.
+     *
+     * @param {Object} interestInput DOM object of interest input.
+     * @param {Object} tagWrapper Dom object of tag wrapper.
+     */
     listTags(interestInput, tagWrapper){
         const existingTags = tagWrapper.querySelectorAll('.tag');
         let tagHTML = ``;
@@ -51,6 +66,12 @@ const interestTag = {
         interestHiddenInput.value = JSON.stringify(interestTag.tags);
         interestTag.removeTagHandler(interestInput, tagWrapper);
     },
+    /**
+     * Add event to x.
+     *
+     * @param {Object} interestInput DOM object of interest input.
+     * @param {Object} tagWrapper Dom object of tag wrapper.
+     */
     removeTagHandler(interestInput, tagWrapper){
         const existingTagClose = tagWrapper.querySelectorAll('.tag_close');
         for(let tagClose of existingTagClose){
@@ -63,6 +84,11 @@ const interestTag = {
             });
         }
     },
+    /**
+     * Check duplication of tags.
+     *
+     * @param {String} interestInputValue String which is extracted from interest input.
+     */
     isTagDuplicated(interestInputValue){
         let isDuplicated = false;
         for(let tag of interestTag.tags){
@@ -70,12 +96,23 @@ const interestTag = {
         }
         return isDuplicated
     },
+    /**
+     * Return last tag to interest input.
+     *
+     * @param {Object} interestInput DOM object of interest input.
+     * @param {Object} tagWrapper Dom object of tag wrapper.
+     */
     modifyPreviousTag(interestInput, tagWrapper){
         const inputValue = interestTag.tags.pop();
-        console.log(inputValue);
         interestInput.value = inputValue;
         interestTag.listTags(interestInput, tagWrapper);
     },
+    /**
+     * Return true if value of interest input isn't null.
+     *
+     * @param {String} previousValue Existing input value.
+     * @return {boolean} Return true if value of interest input isn't null.
+     */
     isPreviousInputEmpty(previousValue){
         return !previousValue;
     }

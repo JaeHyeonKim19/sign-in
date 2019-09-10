@@ -1,6 +1,8 @@
 import {signInHandler} from './signIn/signIn.js';
 import {mainHtml} from './mainHtml.js';
-
+/**
+ * Check cookie's validation and render main page.
+ */
 const mainInit = () => {
     const currentUrl = document.location.href;
     fetch(currentUrl, {
@@ -36,6 +38,9 @@ const mainInit = () => {
     
 }
 
+/**
+ * Register event which is trying sign in when click button.
+ */
 const signOutHandler = () => {
     const signOutButton = document.querySelector('.main_sign_out_button');
     signOutButton.addEventListener('click', () => {

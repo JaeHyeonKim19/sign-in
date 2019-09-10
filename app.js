@@ -20,6 +20,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+/**
+ * Check existence and vlidation of cookie.
+ */
 app.use(function(req, res, next){
   if(req.body.type==='cookieCheck'){
     const data = decodeURI(req.body.data).split('=');

@@ -2,6 +2,11 @@ import {util} from '../util.js';
 import {signInHandlerCallBack} from '../signIn/signIn.js';
 
 const signUpMessageMaker = {
+    /**
+     * Make warning message of sign up id.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makeSigUpIdMessage : async () => {
         const idInput = document.querySelector('#id_input');
         const idMessage = document.querySelector('#id_message');
@@ -42,6 +47,11 @@ const signUpMessageMaker = {
         }
         return [idMessage, message, result];
     },
+    /**
+     * Make warning message of sign up password.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makeSignUpPwMessage : () => {
         const pwInput = document.querySelector('#pw_input');
         const pwMessage = document.querySelector('#pw_message');
@@ -64,6 +74,11 @@ const signUpMessageMaker = {
         }
         return [pwMessage, message, result];
     },
+    /**
+     * Make warning message of sign up password check.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makeSignUpPwCheckMessage : () => {
         const pwCheckInput = document.querySelector('#pw_check_input');
         const pwInput = document.querySelector('#pw_input');
@@ -84,6 +99,11 @@ const signUpMessageMaker = {
         }
         return [pwCheckMessage, message, result];
     },
+    /**
+     * Make warning message of sign up name.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makeNameMessage : () => {
         const nameInput = document.querySelector('#name_input');
         const nameMessage = document.querySelector('#name_message');
@@ -96,6 +116,11 @@ const signUpMessageMaker = {
         }
         return [nameMessage, message, result];
     },
+    /**
+     * Make warning message of sign up birth.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makeBirthMessage : () => {
         const birthMessage = document.querySelector('#birth_message');
         const birthYearInput = document.querySelector('#birth_year_input');
@@ -134,6 +159,11 @@ const signUpMessageMaker = {
         }
         return [birthMessage, message, result];
     },
+    /**
+     * Make warning message of sign up gender.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makeGenderMessage : () => {
         const genderMessage = document.querySelector('#gender_dropmenu_message');
         const genderMenu = document.querySelector('.gender_dropmenu');
@@ -146,6 +176,11 @@ const signUpMessageMaker = {
         }
         return [genderMessage, message, result]
     },
+    /**
+     * Make warning message of sign up email.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makeEmailMessage : () => {
         const emailMessage = document.querySelector('#email_message');
         const emailInput = document.querySelector('#email_input');
@@ -158,6 +193,11 @@ const signUpMessageMaker = {
         }
         return [emailMessage, message, result];
     },
+    /**
+     * Make warning message of sign up phone.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makePhoneMessage : () => {
         const phoneMessage = document.querySelector('#phone_message');
         const phoneInput = document.querySelector('#phone_input');
@@ -170,6 +210,11 @@ const signUpMessageMaker = {
         }
         return [phoneMessage, message, result];
     },
+    /**
+     * Make warning message of sign up interest.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makeInterestMessage(){
         const interestMessage = document.querySelector('#interest_message');
         const tags = document.querySelectorAll('.tag');
@@ -182,6 +227,11 @@ const signUpMessageMaker = {
         }
         return [interestMessage, message, result];
     },
+    /**
+     * Make warning message of sign up agreement.
+     *
+     * @return {Array} [idMessage, message, result] Return DOM object, string, boolean.
+     */
     makeAgreementMessage(){
         const agreementMessage = document.querySelector('#agreement_message');
         const checkbox = document.querySelector('#term_checkbox');
@@ -193,30 +243,45 @@ const signUpMessageMaker = {
 }
 
 const signUpValidationHandler = {
+    /**
+     * Register printing sign up id warning message event.
+     */
     signUpIdMessageHandler : () => {
         const idInput = document.querySelector('#id_input');
         idInput.addEventListener('blur', async () => {
             await util.printMessage(await signUpMessageMaker.makeSigUpIdMessage());
         });
     },
+    /**
+     * Register printing sign up password warning message event.
+     */
     signUpPwMessageHandler : () => {
         const pwInput = document.querySelector('#pw_input');
         pwInput.addEventListener('blur', () => {
             util.printMessage(signUpMessageMaker.makeSignUpPwMessage());
         });
     },
+    /**
+     * Register printing sign up password checking warning message event.
+     */
     signUpPwCheckMessageHandler : () => {
         const pwCheckInput = document.querySelector('#pw_check_input');
         pwCheckInput.addEventListener('blur', () => {
             util.printMessage(signUpMessageMaker.makeSignUpPwCheckMessage());
         });
     },
+    /**
+     * Register printing sign up name warning message event.
+     */
     nameMessageHandler : () => {
         const nameInput = document.querySelector('#name_input');
         nameInput.addEventListener('blur', () => {
             util.printMessage(signUpMessageMaker.makeNameMessage());
         });
     },
+    /**
+     * Register printing sign up birth warning message event.
+     */
     birthMessageHandler : () => {
         const birthYearInput = document.querySelector('#birth_year_input');
         const birthMonthMenu = document.querySelector('.birth_month_dropmenu');
@@ -228,30 +293,45 @@ const signUpValidationHandler = {
             });
         });
     },
+    /**
+     * Register printing sign up gender warning message event.
+     */
     genderMessageHandler : () => {
         const genderMenu = document.querySelector('.gender_dropmenu');
         genderMenu.addEventListener('blur', () => {
             util.printMessage(signUpMessageMaker.makeGenderMessage());
         });
     },
+    /**
+     * Register printing sign up email warning message event.
+     */
     emailMessageHandler : () => {
         const emailInput = document.querySelector('#email_input');
         emailInput.addEventListener('blur', () => {
             util.printMessage(signUpMessageMaker.makeEmailMessage());
         });
     },
+    /**
+     * Register printing sign up phone warning message event.
+     */
     phoneMessageHandler : () => {
         const phoneInput = document.querySelector('#phone_input');
         phoneInput.addEventListener('blur', () => {
             util.printMessage(signUpMessageMaker.makePhoneMessage());
         });
     },
+    /**
+     * Register printing sign up interest warning message event.
+     */
     interestMessageHandler : () => {
         const interestInput = document.querySelector('#tag_input');
         interestInput.addEventListener('blur', () => {
             util.printMessage(signUpMessageMaker.makeInterestMessage());
         });
     },
+    /**
+     * Register sign up event.
+     */
     confirmValidator : () => {
         const signUpButton = document.querySelector('#sign_up_button');
         signUpButton.addEventListener('click', () => {
@@ -287,7 +367,9 @@ const signUpValidationHandler = {
         });
     }
 }
-
+/**
+ * Check all of validation before sign up.
+ */
 const finalConfirm = async () => {
     let messageObject = [];
     let result = true;
